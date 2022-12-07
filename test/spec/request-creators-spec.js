@@ -1,15 +1,15 @@
-import {createSearchRequest, createSortRequest} from "../../src/request-creators.js";
+import {createSearchParams, createSortParams} from "../../src/request-creators.js";
 import {SORT_DIR} from "../../src";
 
-describe("request creator functions tests", () => {
-    it("createSearchRequest", () => {
+describe("parameters request creator functions tests", () => {
+    it("createSearchParams", () => {
         let searchData = [
             {field: "fieldName1", value: "value1"},
             {field: "fieldName2", value: "value2"},
             {field: "fieldName3", value: "value3"}
         ];
 
-        let searchRequest = createSearchRequest(searchData);
+        let searchRequest = createSearchParams(searchData);
         expect(searchRequest).toBeInstanceOf(Object);
         expect(searchRequest['search[0][name]']).toEqual("fieldName1");
         expect(searchRequest['search[0][value]']).toEqual("value1");
@@ -23,7 +23,7 @@ describe("request creator functions tests", () => {
             fieldName2: "value2",
             fieldName3: "value3"
         }
-        let searchRequest1 = createSearchRequest(searchData1);
+        let searchRequest1 = createSearchParams(searchData1);
         expect(searchRequest1).toBeInstanceOf(Object);
         expect(searchRequest1['search[0][name]']).toEqual("fieldName1");
         expect(searchRequest1['search[0][value]']).toEqual("value1");
@@ -37,7 +37,7 @@ describe("request creator functions tests", () => {
             {value: "fieldName2", title: "value2"},
             {value: "fieldName3", title: "value3"}
         ];
-        let searchRequest2 = createSearchRequest(searchData2, "value", "title");
+        let searchRequest2 = createSearchParams(searchData2, "value", "title");
         expect(searchRequest2).toBeInstanceOf(Object);
         expect(searchRequest2['search[0][name]']).toEqual("fieldName1");
         expect(searchRequest2['search[0][value]']).toEqual("value1");
@@ -65,25 +65,25 @@ describe("request creator functions tests", () => {
             prop3: "prop3"
         };
         let stringFieldValue = JSON.stringify(objectFieldValue);
-        let searchRequest3 = createSearchRequest(searchData3, "value", "title");
+        let searchRequest3 = createSearchParams(searchData3, "value", "title");
         expect(searchRequest3).toBeInstanceOf(Object);
         expect(searchRequest3['search[0][name]']).toEqual("fieldName1");
         expect(searchRequest3['search[0][value]']).toEqual(stringFieldValue);
 
-        let searchRequest4 = createSearchRequest(searchData3, "value", "title", false);
+        let searchRequest4 = createSearchParams(searchData3, "value", "title", false);
         expect(searchRequest4).toBeInstanceOf(Object);
         expect(searchRequest4['search[0][name]']).toEqual("fieldName1");
         expect(searchRequest4['search[0][value]']).toEqual(objectFieldValue);
     });
 
-    it("createSortRequest", () => {
+    it("createSortParams", () => {
         let sortData = [
             {field: "fieldName1", value: SORT_DIR.ASC},
             {field: "fieldName2", value: SORT_DIR.DESC},
             {field: "fieldName3", value: SORT_DIR.ASC}
         ];
 
-        let sortRequest = createSortRequest(sortData);
+        let sortRequest = createSortParams(sortData);
         expect(sortRequest).toBeInstanceOf(Object);
         expect(sortRequest['order[0][name]']).toEqual("fieldName1");
         expect(sortRequest['order[0][dir]']).toEqual(SORT_DIR.ASC);
@@ -97,7 +97,7 @@ describe("request creator functions tests", () => {
             fieldName2: SORT_DIR.DESC,
             fieldName3: SORT_DIR.ASC
         }
-        let sortRequest1 = createSortRequest(sortData1);
+        let sortRequest1 = createSortParams(sortData1);
         expect(sortRequest1).toBeInstanceOf(Object);
         expect(sortRequest1['order[0][name]']).toEqual("fieldName1");
         expect(sortRequest1['order[0][dir]']).toEqual(SORT_DIR.ASC);
@@ -111,7 +111,7 @@ describe("request creator functions tests", () => {
             {value: "fieldName2", title: SORT_DIR.DESC},
             {value: "fieldName3", title: SORT_DIR.ASC}
         ];
-        let sortRequest2 = createSortRequest(sortData2, "value", "title");
+        let sortRequest2 = createSortParams(sortData2, "value", "title");
         expect(sortRequest2).toBeInstanceOf(Object);
         expect(sortRequest2['order[0][name]']).toEqual("fieldName1");
         expect(sortRequest2['order[0][dir]']).toEqual(SORT_DIR.ASC);
@@ -125,7 +125,7 @@ describe("request creator functions tests", () => {
             fieldName2: SORT_DIR.DESC,
             fieldName3: false
         }
-        let sortRequest3 = createSortRequest(sortData3);
+        let sortRequest3 = createSortParams(sortData3);
         expect(sortRequest3).toBeInstanceOf(Object);
         expect(sortRequest3['order[0][name]']).toEqual("fieldName1");
         expect(sortRequest3['order[0][dir]']).toEqual(SORT_DIR.ASC);

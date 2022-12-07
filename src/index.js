@@ -1,6 +1,6 @@
 export {
-    createSearchRequest,
-    createSortRequest,
+    createSearchParams,
+    createSortParams,
 } from './request-creators.js';
 
 export {

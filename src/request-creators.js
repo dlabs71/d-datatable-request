@@ -1,6 +1,27 @@
 import { convertObjectToArray, createSearchParam, createSortParam } from './common';
 
-export function createSearchRequest(
+/**
+ * Function for creating object with search keys
+ * @param searchData - data for search (key/value Array or Object)
+ * @param keyField - name key field in item of array. If searchData is Array
+ * @param valueField - name value field in item of array. If searchData is Array
+ * @param stringifyValue - if true then result value of object keys will be convert to string (Object or Array)
+ * @returns {Object} - result object with search keys
+ *
+ * Example:
+ * searchData = {
+ *     prop1: "value1",
+ *     prop2: "value2"
+ * }
+ *
+ * result = {
+ *     search[0][name]: "prop1",
+ *     search[0][value]: "value1",
+ *     search[1][name]: "prop2",
+ *     search[1][value]: "value2"
+ * }
+ */
+export function createSearchParams(
     searchData,
     keyField = 'field',
     valueField = 'value',
@@ -42,7 +63,27 @@ export function createSearchRequest(
     return searchRequest;
 }
 
-export function createSortRequest(
+/**
+ * Function for creating object with sort keys
+ * @param sortData - data for sort (key/value Array or Object)
+ * @param keyField - name key field in item of array. If searchData is Array
+ * @param valueField - name value field in item of array. If searchData is Array
+ * @returns {Object} - result object with sort keys
+ *
+ * Example:
+ * sortData = {
+ *     prop1: "asc",
+ *     prop2: "desc"
+ * }
+ *
+ * result = {
+ *     order[0][name]: "prop1",
+ *     order[0][dir]: "asc",
+ *     order[1][name]: "prop2",
+ *     order[1][dir]: "desc"
+ * }
+ */
+export function createSortParams(
     sortData,
     keyField = 'field',
     valueField = 'value',
